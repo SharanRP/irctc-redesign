@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRCTC - Book Train Tickets Online</title>
+  <meta name="description" content="Book train tickets online at IRCTC. Easy booking, secure payment, instant confirmation.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header">
+        <a href="#" class="header-brand">
+          <div class="header-logo" style="background: white; border-radius: 50%; overflow: hidden; padding: 2px;">
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/45/IRCTC_Logo.svg" alt="IRCTC Logo" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div>
+            <span class="header-title">IRCTC</span>
+            <span class="header-tagline">Lifeline of the nation</span>
+          </div>
+        </a>
+        
+        <div class="header-actions">
+          <div class="header-language">
+            <button class="header-lang-btn active">EN</button>
+            <button class="header-lang-btn">हि</button>
+          </div>
+          <button class="header-user">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="sm:hidden">Sign In</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <div class="container">
+        
+        <!-- Step 1: Search -->
+        <section class="step step-active" id="step-search">
+          <div class="search-page-layout">
+            
+            <!-- Left Column: Welcome & Search -->
+            <div class="search-left">
+              <div class="hero-welcome">
+                <h1 class="hero-title">
+                  Lifeline of the<br>
+                  <span class="text-accent">Nation.</span>
+                </h1>
+                <p class="hero-subtitle">
+                  Indian Railway Catering and Tourism Corporation Ltd. Book your train tickets online securely.
+                </p>
+              </div>
+
+              <div class="search-hero">
+                <div class="search-card">
+                  <!-- Journey Tabs -->
+                  <div class="journey-tabs">
+                    <button class="journey-tab journey-tab-active" data-type="one-way">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      One Way
+                    </button>
+                    <button class="journey-tab" data-type="round-trip">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                      Round Trip
+                    </button>
+                    <button class="journey-tab" data-type="multi-city">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                      Multi-City
+                    </button>
+                  </div>
+
+                  <!-- Search Form -->
+                  <form class="search-form" id="searchForm">
+                    <div class="search-field">
+                      <label class="input-label">From</label>
+                      <input type="text" class="input" id="fromStation" placeholder="Enter station name" autocomplete="off">
+                    </div>
+
+                    <div class="search-field">
+                      <button type="button" class="search-field-swap" id="swapStations" title="Swap stations">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+                      </button>
+                      <label class="input-label">To</label>
+                      <input type="text" class="input" id="toStation" placeholder="Enter station name" autocomplete="off">
+                    </div>
+
+                    <div class="search-field">
+                      <label class="input-label">Travel Date</label>
+                      <input type="date" class="input" id="travelDate">
+                    </div>
+
+                    <div class="search-field">
+                      <label class="input-label">Class</label>
+                      <select class="input select" id="travelClass">
+                        <option value="ALL">All Classes</option>
+                        <option value="1A">AC First Class (1A)</option>
+                        <option value="2A">AC 2 Tier (2A)</option>
+                        <option value="3A">AC 3 Tier (3A)</option>
+                        <option value="SL">Sleeper (SL)</option>
+                        <option value="CC">AC Chair Car (CC)</option>
+                      </select>
+                    </div>
+
+                    <div class="search-field">
+                      <label class="input-label">Quota</label>
+                      <select class="input select" id="quota">
+                        <option value="GN">General</option>
+                        <option value="TQ">Tatkal</option>
+                        <option value="LD">Ladies</option>
+                        <option value="DP">Divyang</option>
+                        <option value="SR">Senior Citizen</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent btn-full search-submit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                      Search Trains
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Quick Actions & Imagery -->
+            <div class="search-right" style="display: flex; flex-direction: column; gap: var(--space-6); height: 100%;">
+              <div class="promo-card" style="flex-grow: 1; min-height: 320px;">
+                <img src="images/train.png" alt="Beautiful Train Journey" class="promo-img">
+                <div class="promo-overlay">
+                  <div class="promo-badge">Summer Special</div>
+                  <h3 class="promo-title">Discover India by Train</h3>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="quick-actions">
+                <h3 class="quick-actions-title">Quick Actions</h3>
+                <div class="quick-actions-grid custom-qa-grid">
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">🎫</span><span class="quick-action-label">PNR Status</span></button>
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">🚃</span><span class="quick-action-label">Train Status</span></button>
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">❌</span><span class="quick-action-label">Cancel Ticket</span></button>
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">🏨</span><span class="quick-action-label">Hotels</span></button>
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">🛤️</span><span class="quick-action-label">Availability</span></button>
+                  <button class="quick-action custom-qa"><span class="quick-action-icon">📅</span><span class="quick-action-label">Calendar</span></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Step 2: Train Results -->
+        <section class="step" id="step-results">
+          <div class="step-header">
+            <button class="step-back" id="backToSearch">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back
+            </button>
+            
+            <div class="results-summary">
+              <span class="results-route"><strong id="displayFrom">New Delhi</strong> → <strong id="displayTo">Mumbai</strong></span>
+              <span class="results-date" id="displayDate">Wed, 15 Jan 2025</span>
+            </div>
+            
+            <button class="btn-modify" id="modifySearch">Modify Search</button>
+          </div>
+
+          <!-- Filters -->
+          <div class="filters">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="chip chip-active" data-filter="recommended">Recommended</button>
+              <button class="chip" data-filter="fastest">Fastest</button>
+              <button class="chip" data-filter="cheapest">Cheapest</button>
+              <button class="chip" data-filter="available">Available</button>
+            </div>
+          </div>
+
+          <!-- Train List -->
+          <div class="train-list" id="trainList"></div>
+        </section>
+
+        <!-- Step 3: Train Selection & Passenger -->
+        <section class="step" id="step-select">
+          <div class="step-header">
+            <button class="step-back" id="backToResults">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back to Results
+            </button>
+          </div>
+
+          <!-- Train Detail -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-body" id="trainDetailCard"></div>
+          </div>
+
+          <!-- Class Selection -->
+          <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Select Class</h3>
+          <div class="class-grid class-grid-cols-3" id="classOptions" style="margin-bottom: 32px;"></div>
+
+          <!-- Passenger Details -->
+          <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Passenger Details</h3>
+          <div id="passengerForm" style="margin-bottom: 16px;"></div>
+          
+          <button class="btn btn-secondary btn-full" id="addPassengerBtn" style="margin-bottom: 32px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Another Passenger
+          </button>
+
+          <!-- Continue -->
+          <button class="btn btn-primary btn-xl btn-full" id="continueToPayment">
+            Continue to Payment
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </section>
+
+        <!-- Step 4: Payment -->
+        <section class="step" id="step-payment">
+          <div class="step-header">
+            <button class="step-back" id="backToSelect">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back
+            </button>
+          </div>
+
+          <div class="payment">
+            <!-- Fare Summary -->
+            <div class="payment-summary">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Fare Summary</h3>
+              <div class="payment-summary-row">
+                <span class="payment-summary-label">Base Fare (1 Passenger)</span>
+                <span class="payment-summary-value" id="baseFare">₹1,240</span>
+              </div>
+              <div class="payment-summary-row">
+                <span class="payment-summary-label">Superfast Charge</span>
+                <span class="payment-summary-value">₹40</span>
+              </div>
+              <div class="payment-summary-row">
+                <span class="payment-summary-label">GST (5%)</span>
+                <span class="payment-summary-value">₹64</span>
+              </div>
+              <div class="payment-summary-row" style="padding-top: 16px; border-top: 2px solid var(--color-primary);">
+                <span style="font-weight: 600;">Total Amount</span>
+                <span class="payment-summary-total" id="totalFare">₹1,344</span>
+              </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div>
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Payment Method</h3>
+              <div class="payment-methods">
+                <button class="payment-method payment-method-active" data-method="upi">
+                  <span class="payment-method-icon">📱</span>
+                  <span class="payment-method-name">UPI</span>
+                  <span class="payment-method-detail">Instant transfer</span>
+                </button>
+                <button class="payment-method" data-method="card">
+                  <span class="payment-method-icon">💳</span>
+                  <span class="payment-method-name">Card</span>
+                  <span class="payment-method-detail">Visa, Mastercard</span>
+                </button>
+                <button class="payment-method" data-method="netbanking">
+                  <span class="payment-method-icon">🏦</span>
+                  <span class="payment-method-name">Net Banking</span>
+                  <span class="payment-method-detail">All banks</span>
+                </button>
+                <button class="payment-method" data-method="wallet">
+                  <span class="payment-method-icon">👛</span>
+                  <span class="payment-method-name">Wallet</span>
+                  <span class="payment-method-detail">Paytm, Amazon</span>
+                </button>
+              </div>
+
+              <!-- UPI Section -->
+              <div class="upi-section upi-section-active" id="upiSection">
+                <div class="upi-qr">
+                  <div class="upi-qr-placeholder">
+                    <span class="upi-qr-icon">📱</span>
+                    <span class="upi-qr-text">Scan QR to Pay</span>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Or enter UPI ID</label>
+                  <input type="text" class="input" placeholder="username@upi">
+                </div>
+              </div>
+
+              <div class="secure-badge">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>100% Secure. We do not store card details.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Footer -->
+          <div class="payment-footer">
+            <button class="btn btn-primary btn-xl btn-full" id="payNowBtn">
+              <span class="pay-amount">Pay ₹1,344</span>
+              <span class="pay-text">Secure Payment</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 5: Confirmation -->
+        <section class="step" id="step-confirmation">
+          <div class="confirmation">
+            <div class="confirmation-success">✓</div>
+            <h1 class="confirmation-title">Booking Confirmed!</h1>
+            <p class="confirmation-message">Your ticket has been booked successfully</p>
+
+            <div class="confirmation-pnr">
+              <span class="confirmation-pnr-label">PNR Number</span>
+              <span class="confirmation-pnr-number">4728-394-9128</span>
+            </div>
+
+            <!-- Ticket -->
+            <div class="ticket">
+              <div class="ticket-header">
+                <div>
+                  <span class="ticket-train-name" id="confirmTrainName">Rajdhani Express</span>
+                  <span class="ticket-train-number">12002</span>
+                </div>
+                <span class="ticket-class-badge">AC 3 Tier</span>
+              </div>
+
+              <div class="ticket-body">
+                <div class="ticket-location">
+                  <div class="ticket-time" id="confirmDeparture">16:55</div>
+                  <div class="ticket-station" id="confirmFromStation">New Delhi (NDLS)</div>
+                  <div class="ticket-date">Wed, 15 Jan</div>
+                </div>
+
+                <div class="ticket-duration">
+                  <div class="ticket-duration-line"></div>
+                  <div class="ticket-duration-time">15h 25m</div>
+                </div>
+
+                <div class="ticket-location">
+                  <div class="ticket-time" id="confirmArrival">08:20</div>
+                  <div class="ticket-station" id="confirmToStation">Mumbai Central</div>
+                  <div class="ticket-date">Thu, 16 Jan</div>
+                </div>
+              </div>
+
+              <div class="ticket-footer">
+                <div class="ticket-passenger">
+                  <span class="ticket-label">Passenger</span>
+                  <span class="ticket-value" id="confirmPassenger">John Doe</span>
+                </div>
+                <div class="ticket-seat">
+                  <span class="ticket-label">Seat/Berth</span>
+                  <span class="ticket-value" id="confirmSeat">S-9, LB</span>
+                </div>
+              </div>
+
+              <div class="ticket-qr">
+                <span class="text-sm" style="color: var(--color-text-tertiary);">QR Code for verification</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="confirmation-actions">
+              <button class="btn btn-secondary" id="resendTicket">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5m0 0h-.5a.5.5 0 0 1-.5-.5V11m0-5.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0"/></svg>
+                Resend E-Ticket
+              </button>
+              <button class="btn btn-secondary" id="addToWallet">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Add to Wallet
+              </button>
+              <button class="btn btn-primary" id="bookReturn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Book Return
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Progress Indicator -->
+    <nav class="app-progress">
+      <div class="container flex items-center justify-center" style="gap: 12px;">
+        <div class="progress">
+          <div class="progress-step progress-step-active">
+            <span class="progress-indicator">1</span>
+            <span class="progress-label">Search</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="progress-indicator">2</span>
+            <span class="progress-label">Select</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="progress-indicator">3</span>
+            <span class="progress-label">Details</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="progress-indicator">4</span>
+            <span class="progress-label">Payment</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="progress-indicator">5</span>
+            <span class="progress-label">Done</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- JavaScript Files (in order) -->
+  <!-- Core -->
+  <script src="js/core/store.js"></script>
+  
+  <!-- Components -->
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/autocomplete.js"></script>
+  <script src="js/components/stepManager.js"></script>
+  <script src="js/components/i18n.js"></script>
+  
+  <!-- Data -->
+  <script src="js/data/data.js"></script>
+  
+  <!-- Features -->
+  <script src="js/features/search.js"></script>
+  <script src="js/features/trainList.js"></script>
+  <script src="js/features/trainDetail.js"></script>
+  <script src="js/features/payment.js"></script>
+  <script src="js/features/confirmation.js"></script>
+  
+  <!-- Main -->
+  <script src="js/app.js"></script>
+</body>
+</html>
