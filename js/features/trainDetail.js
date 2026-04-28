@@ -9,25 +9,45 @@ class TrainDetailFeature {
     this.init();
   }
   
-  init() {
-    // Back button
+init() {
     utils.$('#backToResults')?.addEventListener('click', () => {
+      this.savePassengerData();
       stepManager.goToStep(2);
     });
-    
-    // Continue button
+
     utils.$('#continueToPayment')?.addEventListener('click', () => {
       if (!this.validate()) return;
       stepManager.goToStep(4);
     });
-    
-    // Add passenger button
+
     utils.$('#addPassengerBtn')?.addEventListener('click', () => {
       this.addPassenger();
     });
-    
-    // Listen for train selection
+
     events.on('train:select', (train) => this.render(train));
+
+    events.on('step:change', (step) => {
+      if (step === 3) {
+        this.renderPassengers();
+      }
+    });
+  }
+
+  savePassengerData() {
+    const state = store.getState();
+    const updatedPassengers = [];
+
+    for (let i = 0; i < state.passengerCount; i++) {
+      const name = utils.$(`#passenger${i}Name`)?.value?.trim() || state.passengers[i]?.name || '';
+      const age = utils.$(`#passenger${i}Age`)?.value?.trim() || state.passengers[i]?.age || '';
+      const gender = utils.$(`#passenger${i}Gender`)?.value || state.passengers[i]?.gender || '';
+      const idProof = utils.$(`#passenger${i}IdProof`)?.value || state.passengers[i]?.idProof || '';
+      const idNumber = utils.$(`#passenger${i}IdNumber`)?.value?.trim() || state.passengers[i]?.idNumber || '';
+
+      updatedPassengers.push({ name, age, gender, idProof, idNumber });
+    }
+
+    store.setState({ passengers: updatedPassengers }, { silent: true });
   }
   
   render(train) {
@@ -195,30 +215,37 @@ class TrainDetailFeature {
     toast.success(`Added Passenger ${newCount}`);
   }
   
-  validate() {
+validate() {
     const state = store.getState();
-    
+
     if (!this.selectedClass) {
       toast.error('Please select a class');
       return false;
     }
-    
+
+    const updatedPassengers = [];
     for (let i = 0; i < state.passengerCount; i++) {
-      const name = utils.$(`#passenger${i}Name`)?.value;
-      const age = utils.$(`#passenger${i}Age`)?.value;
+      const name = utils.$(`#passenger${i}Name`)?.value?.trim();
+      const age = utils.$(`#passenger${i}Age`)?.value?.trim();
       const gender = utils.$(`#passenger${i}Gender`)?.value;
-      
+      const idProof = utils.$(`#passenger${i}IdProof`)?.value;
+      const idNumber = utils.$(`#passenger${i}IdNumber`)?.value?.trim();
+
       if (!name || !age || !gender) {
         toast.error(`Please fill all details for Passenger ${i + 1}`);
         return false;
       }
-      
+
       if (parseInt(age) < 5) {
         toast.error('Child must be 5+ years for booking');
         return false;
       }
+
+      updatedPassengers.push({ name, age, gender, idProof, idNumber });
     }
-    
+
+    store.setState({ passengers: updatedPassengers });
+
     return true;
   }
 }

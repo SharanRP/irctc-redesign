@@ -136,10 +136,16 @@ class TrainListFeature {
     `;
   }
   
-  selectTrain(index) {
+selectTrain(index) {
     const train = this.trains[index];
-    store.setState({ selectedTrain: train });
-    
+
+    store.setState({
+      selectedTrain: train,
+      selectedClass: null,
+      passengers: [{ name: '', age: '', gender: '', idProof: '', idNumber: '' }],
+      passengerCount: 1
+    });
+
     events.emit('train:select', train);
     stepManager.goToStep(3);
   }

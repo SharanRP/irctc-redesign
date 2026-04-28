@@ -57,50 +57,50 @@ class SearchFeature {
     });
   }
   
-  handleSubmit(e) {
+handleSubmit(e) {
     e.preventDefault();
-    
-    const state = store.getState();
-    
-    // Validation
-    if (!state.fromStation || !state.toStation) {
+
+    const from = this.fromInput.value.trim();
+    const to = this.toInput.value.trim();
+
+    if (!from || !to) {
       toast.error('Please select both stations');
       return;
     }
-    
+
     if (!this.dateInput.value) {
       toast.error('Please select a travel date');
       return;
     }
-    
-    if (state.fromStation === state.toStation) {
+
+    if (from === to) {
       toast.error('From and To stations must be different');
       return;
     }
-    
-    // Update state
+
     store.setState({
-      fromStation: this.fromInput.value,
-      toStation: this.toInput.value,
+      fromStation: from,
+      toStation: to,
       travelDate: this.dateInput.value,
       travelClass: this.classInput.value,
       quota: this.quotaInput.value
     });
-    
-    // Emit event
-    events.emit('search:submit', state);
-    
-    // Go to results
+
     stepManager.goToStep(2);
   }
   
-  swap() {
+swap() {
     const from = this.fromInput.value;
     const to = this.toInput.value;
-    
+
     this.fromInput.value = to;
     this.toInput.value = from;
-    
+
+    store.setState({
+      fromStation: to,
+      toStation: from
+    });
+
     toast.success('Stations swapped');
   }
   

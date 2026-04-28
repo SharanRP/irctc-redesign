@@ -41,36 +41,46 @@ class PaymentFeature {
     store.setState({ paymentMethod: method });
   }
   
-  process() {
+process() {
     const btn = utils.$('#payNowBtn');
-    
-    // Show loading
+
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner" style="width: 18px; height: 18px;"></span><span>Processing...</span>';
-    
-    // Simulate payment (in production, call API)
+
     setTimeout(() => {
-      // Populate confirmation
       const state = store.getState();
-      
+      const passengers = state.passengers || [];
+      const firstPassenger = passengers[0] || {};
+
       utils.$('#confirmTrainName').textContent = state.selectedTrain?.name || 'Rajdhani Express';
       utils.$('#confirmFromStation').textContent = `${state.fromStation || 'New Delhi'} (${state.selectedTrain?.from || 'NDLS'})`;
       utils.$('#confirmToStation').textContent = `${state.toStation || 'Mumbai'} (${state.selectedTrain?.to || 'BSDT'})`;
       utils.$('#confirmDeparture').textContent = state.selectedTrain?.departureTime || '16:55';
       utils.$('#confirmArrival').textContent = state.selectedTrain?.arrivalTime || '08:20';
-      utils.$('#confirmPassenger').textContent = 
-        utils.$(`#passenger0Name`)?.value || 'Passenger 1';
-      utils.$('#confirmSeat').textContent = (state.selectedClass || '3A') + '-9, LB';
-      
-      // Go to confirmation
+      utils.$('#confirmPassenger').textContent = firstPassenger.name || state.passengerName || 'Passenger 1';
+
+      const seatNum = Math.floor(Math.random() * 50) + 1;
+      const berths = ['LB', 'UB', 'MB', 'SL', 'SU'];
+      const berth = berths[Math.floor(Math.random() * berths.length)];
+      utils.$('#confirmSeat').textContent = `${state.selectedClass || '3A'}-${seatNum}, ${berth}`;
+
+      const pnr = this.generatePNR();
+      utils.$('.confirmation-pnr-number')?.setAttribute('data-pnr', pnr);
+      utils.$('.confirmation-pnr-number').textContent = pnr;
+
       stepManager.goToStep(5);
-      
-      // Reset button
+
       btn.disabled = false;
       btn.innerHTML = '<span class="pay-amount">Pay ₹1,344</span><span class="pay-text">Secure Payment</span>';
-      
+
       toast.success('Payment successful! Booking confirmed.');
     }, CONFIG.LOADING_DELAY);
+  }
+
+  generatePNR() {
+    return Math.floor(4000 + Math.random() * 1000) + '-' +
+           Math.floor(300 + Math.random() * 100) + '-' +
+           Math.floor(1000 + Math.random() * 1000);
   }
 }
 
