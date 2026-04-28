@@ -67,14 +67,18 @@ class App {
       this.i18n = new I18n();
       window.i18n = this.i18n;
       
-      // Initialize features
-      this.features.search = new SearchFeature();
-      this.features.trainList = new TrainListFeature();
-      this.features.trainDetail = new TrainDetailFeature();
-      this.features.payment = new PaymentFeature();
-      this.features.confirmation = new ConfirmationFeature();
-      
-      // Wait for DOM
+// Initialize features
+    this.features.search = new SearchFeature();
+    this.features.trainList = new TrainListFeature();
+    this.features.trainDetail = new TrainDetailFeature();
+    this.features.payment = new PaymentFeature();
+    this.features.confirmation = new ConfirmationFeature();
+
+    // Initialize modals and quick actions
+    initSignInModal();
+    initQuickActions();
+
+    // Wait for DOM
       await this.waitForDOM();
       
       // Initial render
